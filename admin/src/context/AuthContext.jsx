@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from "react";
+import { apiCall } from "../api/client"; 
 
 export const AuthContext = createContext();
 
@@ -7,21 +8,24 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api/v1"
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api/v1";
 
   // Check if user is already logged in
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/auth/me`, {
-          credentials: "include", // for cookies
+          credentials: "include", // send cookies automatically
         });
         if (res.ok) {
           const data = await res.json();
           setUser(data.user);
+        } else {
+          setUser(null); // invalid or expired cookie
         }
       } catch (err) {
-        console.error("Auth check failed:", err);
+        console.error("[AuthContext] Auth check failed:", err);
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -29,19 +33,22 @@ export function AuthProvider({ children }) {
     checkAuth();
   }, []);
 
+  // Login user
   const login = useCallback(async (email, password) => {
     setError(null);
     try {
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // for cookies
+        credentials: "include", // receive HTTP-only cookie
         body: JSON.stringify({ email, password }),
       });
+
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Login failed");
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || "Login failed");
       }
+
       const data = await res.json();
       setUser(data.user);
       return true;
@@ -51,21 +58,40 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  // Logout user
   const logout = useCallback(async () => {
     try {
-      await fetch(`${API_BASE_URL}/auth/logout`, {
+      const res = await fetch(`${API_BASE_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
+      if (!res.ok) console.warn("[AuthContext] Logout failed");
     } catch (err) {
-      console.error("Logout error:", err);
+      console.error("[AuthContext] Logout error:", err);
     } finally {
       setUser(null);
     }
   }, []);
 
+  // Optional helper to make authenticated API calls
+  const authApiCall = useCallback(
+    (endpoint, options = {}) => {
+      return apiCall(endpoint, { ...options, credentials: "include" });
+    },
+    []
+  );
+
   return (
-    <AuthContext.Provider value={{ user, loading, error, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        error,
+        login,
+        logout,
+        authApiCall, // use this for admin API requests
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
