@@ -1,0 +1,28 @@
+@config "../tailwind.config.js";
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #f2f4f8;
+  --color-foreground: #22223b;
+  --color-card: #ffffff;
+  --color-accent: #e0e0e0;
+  --color-primary: #3b82f6;
+  --color-border: #d1d5db;
+  --color-muted: #f3f4f6;
+  --color-neutral-900: #131313;
+  --color-neutral-800: #1f2937;
+  --color-neutral-700: #374151;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  --radius-token: 0.5rem;
+}
+
+* {
+  @apply transition-colors duration-200;
+}
+
+html.dark {
+  color-scheme: dark;
+}
