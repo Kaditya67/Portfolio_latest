@@ -1,16 +1,102 @@
-# React + Vite
+# Frontend - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the portfolio site, built with React + Vite. It powers public pages like Home, About, Projects, Experience, Learning, Certificates, Gallery, Resume, and Contact.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- Responsive design (desktop & mobile)
+- Dark / light theme toggle
+- Interactive project & learning timelines
+- Built with Tailwind CSS
+- Animations via Framer Motion
+- Optional dynamic content from backend APIs
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Project structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+frontend/
+├─ src/
+│  ├─ api/          # API calls to backend
+│  ├─ components/   # Reusable UI components
+│  ├─ pages/        # Page components
+│  ├─ data/         # Static fallback data (skills, projects, learning)
+│  ├─ main.jsx      # App entry point
+│  └─ index.css     # Tailwind & global styles
+├─ public/          # Static assets (favicons, images)
+├─ vite.config.js   # Vite config
+└─ package.json
+```
+
+---
+
+## Setup
+
+### Prerequisites
+- Node.js 16+ (or your project's supported version)
+- npm or pnpm/yarn
+
+### Install dependencies
+```bash
+cd frontend
+npm install
+```
+
+### Run development server
+```bash
+npm run dev
+```
+The app will typically run at http://localhost:5173 (or the port Vite assigns).
+
+### Build for production
+```bash
+npm run build
+```
+Production assets will be output to the `dist/` folder.
+
+### Linting & formatting
+```bash
+npm run lint     # if configured (ESLint)
+npm run format   # if a formatter script is available (Prettier)
+```
+
+---
+
+## Environment & configuration
+
+- Use an `.env` file (or `.env.local`) to set environment variables. Example for Vite:
+```
+VITE_API_URL=https://api.example.com
+```
+- Ensure the backend API URL is set correctly for production.
+
+---
+
+## Deployment
+
+- Can be deployed to Vercel, Netlify, GitHub Pages, or any static host.
+- Build locally (`npm run build`) and upload the `dist/` folder or connect your repo to the hosting service.
+
+---
+
+## Notes & Extensions
+
+- ESLint is recommended for code quality. Consider adding TypeScript with `typescript` + `typescript-eslint` if you want static typing.
+- React Fast Refresh is supported via `@vitejs/plugin-react` or `@vitejs/plugin-react-swc`.
+- Data can be fetched from backend APIs; `src/data/` provides static fallback content.
+
+---
+
+## Resources
+
+- React docs
+- Vite docs
+- Tailwind CSS
+- Framer Motion
+
+---
+
+This README is frontend-focused. If you want, I can also create a similar README for an admin panel with instructions to connect it to the backend.
