@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import { AuthProvider } from "./context/AuthContext"
-import LoginPage from "./pages/LoginPage"
-import DashboardPage from "./pages/DashboardPage"
-import ProtectedRoute from "./components/ProtectedRoute"
-import "./App.css"
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import "./App.css";
 
 export default function App() {
   return (
@@ -23,5 +23,5 @@ export default function App() {
         </Routes>
       </Router>
     </AuthProvider>
-  )
+  );
 }
