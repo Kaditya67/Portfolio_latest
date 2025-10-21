@@ -28,18 +28,18 @@ export default function ContactTab() {
 
   const handleDelete = async (id) => {
     const toDelete = items.find(m => m._id === id);
-    console.log("Deleting message:", toDelete);
+    // console.log("Deleting message:", toDelete);
     if (toDelete?.saved) {
-      console.warn("Cannot delete saved message!");
+      // console.warn("Cannot delete saved message!");
       return;
     }
     if (!window.confirm("Delete this message?")) return;
     try {
       const res = await api.deleteContact(id);
-      console.log("Delete response:", res);
+      // console.log("Delete response:", res);
       setItems((prev) => prev.filter((m) => m._id !== id));
     } catch (err) {
-      console.error("Delete error:", err);
+      // console.error("Delete error:", err);
       setError(err.message || "Failed to delete.");
     }
   };

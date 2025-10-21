@@ -13,13 +13,13 @@ async function apiCall(endpoint, options = {}) {
     headers,
     credentials: options.credentials || "same-origin",
   });
-  console.log("[apiCall] Response status:", response.status); // <--- log status
+  // console.log("[apiCall] Response status:", response.status); // <--- log status
 
   const result = await response.json().catch(() => ({}));
-    console.log("[apiCall] Data:", result); // <--- log raw data
+    // console.log("[apiCall] Data:", result); // <--- log raw data
   if (!response.ok) {
     throw new Error(result.message || `API error: ${response.status}`);
-    console.error("[apiCall] Error caught:", err);
+    // console.error("[apiCall] Error caught:", err);
   }
   return result;
 }

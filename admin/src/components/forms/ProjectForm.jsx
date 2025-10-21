@@ -37,8 +37,8 @@ export default function ProjectForm({ onSave, onCancel, editingId, initialData, 
   // 🧩 Handle edit mode (prefill data)
   useEffect(() => {
     if (editingId && initialData) {
-      console.log("[v0] EDIT MODE - editingId:", editingId)
-      console.log("[v0] EDIT MODE - initialData:", initialData)
+      // console.log("[v0] EDIT MODE - editingId:", editingId)
+      // console.log("[v0] EDIT MODE - initialData:", initialData)
 
       setFormData({
         slug: initialData.slug || "",

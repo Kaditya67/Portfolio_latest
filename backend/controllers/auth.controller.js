@@ -47,6 +47,7 @@ export const login = async (req, res) => {
     const token = signToken({ id: user._id, role: user.role, email: user.email });
 
     // 🧠 Send token in JSON response (frontend will store it)
+    // console.log(token);
     return res.json({
       message: "Logged in successfully",
       token,

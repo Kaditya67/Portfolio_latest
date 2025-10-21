@@ -49,11 +49,11 @@ export default function CertificateForm({ onSave, editingId, initialData, onCanc
   imageUrl: formData.imageUrl?.trim() || undefined,
 };
 
-console.log("📤 Certificate payload:", payload);
+// console.log("📤 Certificate payload:", payload);
 onSave(payload);
 
 
-  console.log("📤 Certificate payload to send:", payload);
+  // console.log("📤 Certificate payload to send:", payload);
 
     onSave(formData);
   };
