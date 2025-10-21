@@ -1,12 +1,10 @@
 # Node.js / frontend / admin
-frontend/node_modules/
-frontend/dist/
+frontend/node_modules/ 
 frontend/.env
 frontend/.cache/
 frontend/.vite/
 
-admin/node_modules/
-admin/dist/
+admin/node_modules/ 
 admin/.env
 admin/.cache/
 admin/.vite/
