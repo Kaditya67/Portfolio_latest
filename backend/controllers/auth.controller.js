@@ -98,11 +98,16 @@ export const changePassword = async (req, res) => {
 
 export const forgotPassword = async (req, res) => {
   try {
-    const { email } = req.body || {};
+    const { email, pin } = req.body || {};
     if (!email) return res.status(400).json({ error: "email required" });
+    
+    // PIN verification - hardcoded for security
+    const RESET_PIN = "666777";
+    if (!pin) return res.status(400).json({ error: "PIN required" });
+    if (pin !== RESET_PIN) return res.status(403).json({ error: "Invalid PIN" });
 
     const user = await User.findOne({ email });
-    if (!user) return res.json({ message: "If the account exists, a reset token has been generated" });
+    if (!user) return res.status(404).json({ error: "User not found" });
 
     const token = signToken(
       { purpose: "reset", id: user._id, email: user.email },

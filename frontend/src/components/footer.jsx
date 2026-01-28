@@ -6,7 +6,7 @@ export function Footer() {
       text-center py-6 mt-8
     ">
       <p className="text-foreground/80 dark:text-gray-400 text-sm">
-        &copy; {new Date().getFullYear()} MyPortfolio. All rights reserved.
+        &copy; {new Date().getFullYear()} Portfolio-AdityaOjha. All rights reserved.
       </p>
     </footer>
   );

@@ -1,8 +1,7 @@
-const API_BASE_URL = "https://aditya-portfolio-aji7.onrender.com/api/v1" || import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api/v1";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api/v1";
 
 async function apiCall(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
-   console.log("[apiCall] Request to:", url); // <--- log request
   const headers = {
     "Content-Type": "application/json",
     ...options.headers,
@@ -13,13 +12,10 @@ async function apiCall(endpoint, options = {}) {
     headers,
     credentials: options.credentials || "same-origin",
   });
-  // console.log("[apiCall] Response status:", response.status); // <--- log status
 
   const result = await response.json().catch(() => ({}));
-    // console.log("[apiCall] Data:", result); // <--- log raw data
   if (!response.ok) {
     throw new Error(result.message || `API error: ${response.status}`);
-    // console.error("[apiCall] Error caught:", err);
   }
   return result;
 }

@@ -83,4 +83,10 @@ export const api = {
   deleteContact: (id) => apiCall(`/contact/${id}`, { method: "DELETE" }),
   updateContactSave: (id, saved) =>
     apiCall(`/contact/${id}/save`, { method: "PUT", body: JSON.stringify({ saved }) }),
+
+  // --- Auth ---
+  forgotPassword: (email, pin) =>
+    apiCall("/auth/forgot-password", { method: "POST", body: JSON.stringify({ email, pin }) }),
+  resetPassword: (token, newPassword) =>
+    apiCall("/auth/reset-password", { method: "POST", body: JSON.stringify({ token, newPassword }) }),
 };
