@@ -1,5 +1,6 @@
-import { z } from "zod"
-import { About } from "../models/About.js"
+import { z } from "zod";
+import { About } from "../models/About.js";
+import cache from "../utils/cache.js";
 
 const sectionSchema = z.object({
   title: z.string().min(1),
@@ -26,17 +27,24 @@ const schema = z.object({
 })
 
 export const get = async (_req, res) => {
-  const item = await About.findOne()
-  res.json({ item })
-}
+  const cacheKey = "about:data";
+  const cached = cache.get(cacheKey);
+  if (cached) return res.json(cached);
+  
+  const item = await About.findOne().select("-__v").lean();
+  const result = { item };
+  cache.set(cacheKey, result, 300);
+  res.json(result);
+};
 
 export const update = async (req, res) => {
-  const parsed = schema.partial().safeParse(req.body)
-  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() })
+  const parsed = schema.partial().safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ error: parsed.error.flatten() });
 
-  const existing = (await About.findOne()) || (await About.create({ introduction: "Your intro here" }))
-  existing.set(parsed.data)
-  await existing.save()
-
-  res.json({ item: existing })
-}
+  const existing = (await About.findOne()) || (await About.create({ introduction: "Your intro here" }));
+  existing.set(parsed.data);
+  await existing.save();
+  
+  cache.delPattern("about:");
+  res.json({ item: existing });
+};

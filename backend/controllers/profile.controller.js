@@ -1,5 +1,6 @@
-import { z } from "zod"
-import { Profile } from "../models/Profile.js"
+import { z } from "zod";
+import { Profile } from "../models/Profile.js";
+import cache from "../utils/cache.js";
 
 const schema = z.object({
   name: z.string().min(1),
@@ -22,20 +23,27 @@ const schema = z.object({
 })
 
 export const get = async (_req, res) => {
-  const item = await Profile.findOne()
-  res.json({ item })
-}
+  const cacheKey = "profile:data";
+  const cached = cache.get(cacheKey);
+  if (cached) return res.json(cached);
+  
+  const item = await Profile.findOne().select("-__v").lean();
+  const result = { item };
+  cache.set(cacheKey, result, 300);
+  res.json(result);
+};
 
 export const update = async (req, res) => {
-  const parsed = schema.partial().safeParse(req.body)
+  const parsed = schema.partial().safeParse(req.body);
   if (!parsed.success) 
-    return res.status(400).json({ error: parsed.error.flatten() })
+    return res.status(400).json({ error: parsed.error.flatten() });
 
   const existing =
-    (await Profile.findOne()) || (await Profile.create({ name: "Your Name" }))
+    (await Profile.findOne()) || (await Profile.create({ name: "Your Name" }));
 
-  existing.set(parsed.data)
-  await existing.save()
-
-  res.json({ item: existing })
-}
+  existing.set(parsed.data);
+  await existing.save();
+  
+  cache.delPattern("profile:");
+  res.json({ item: existing });
+};
