@@ -93,32 +93,32 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
       {/* Desktop Navbar */}
       <nav
         ref={navRef}
-        className="hidden sm:flex items-center justify-between px-4 lg:px-6 py-3 sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow border-b border-gray-200/70 dark:border-gray-700/60"
+        className="hidden sm:flex items-center justify-between px-4 lg:px-6 py-2 sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200/70 dark:border-gray-700/60"
       >
         {/* Brand */}
-        <div className="flex items-center gap-3 flex-shrink-0" style={{ minWidth: "180px" }}>
+        <div className="flex items-center gap-2.5 flex-shrink-0" style={{ minWidth: "170px" }}>
           <div className="relative">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-black text-lg text-white shadow-lg select-none">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-black text-sm text-white shadow-sm select-none">
               🛡
             </div>
-            <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full bg-green-400 border-2 border-white dark:border-gray-900" />
+            <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-white dark:border-gray-900" />
           </div>
-          <div className="flex flex-col ml-1">
-            <span className="font-bold text-lg text-blue-700 dark:text-blue-200">Portfolio</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 -mt-1">Admin Panel</span>
+          <div className="flex flex-col ml-0.5">
+            <span className="font-bold text-base text-blue-700 dark:text-blue-200 leading-tight">Portfolio</span>
+            <span className="text-[10px] text-gray-500 dark:text-gray-400 -mt-0.5">Admin Panel</span>
           </div>
         </div>
 
         {/* Tabs */}
         <div className="flex-1 flex justify-center mx-2" ref={tabsContainerRef}>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             {visibleTabs.map(({ label, icon: Icon, color }) => {
               const isActive = activeTab === label.toLowerCase();
               return (
                 <button
                   key={label}
                   onClick={() => setActiveTab(label.toLowerCase())}
-                  className={`group relative px-3 py-2 flex items-center gap-2 font-medium text-sm transition-all focus:outline-none whitespace-nowrap border-b-2
+                  className={`group relative px-2.5 py-1.5 flex items-center gap-1.5 font-medium text-xs transition-all focus:outline-none whitespace-nowrap border-b-2
                     ${isActive
                       ? `border-blue-500 text-blue-600 dark:text-blue-400`
                       : `border-transparent text-gray-600 dark:text-gray-300 hover:text-blue-500 hover:border-blue-400`
@@ -127,7 +127,7 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
                   tabIndex={0}
                 >
                   <Icon
-                    className={`text-lg transition-colors duration-200 ${
+                    className={`text-base transition-colors duration-200 ${
                       isActive
                         ? color
                         : "text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400"

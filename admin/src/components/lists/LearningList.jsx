@@ -23,47 +23,47 @@ export default function LearningList({ items, onEdit, onDelete }) {
           No learning items yet.
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-4">
           {items.map(item => (
-            <div key={item._id} className="bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-gray-200 dark:border-neutral-800 shadow-md flex flex-col h-full justify-between transition hover:shadow-lg">
+            <div key={item._id} className="bg-white dark:bg-neutral-900 p-4 rounded-xl border border-gray-200 dark:border-neutral-800 shadow-sm flex flex-col h-full justify-between transition hover:shadow-md">
               <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <FiBookOpen className="text-purple-500" />
-                  <h3 className="font-bold text-lg text-gray-900 dark:text-white truncate">{item.name}</h3>
+                <div className="flex items-center gap-1.5 mb-2">
+                  <FiBookOpen className="text-purple-500 text-sm flex-shrink-0" />
+                  <h3 className="font-semibold text-sm text-gray-900 dark:text-white truncate">{item.name}</h3>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-2">
+                <div className="flex flex-wrap gap-1.5 mb-2">
                   {item.level && (
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold capitalize ${LEVEL_COLORS[item.level]}`}>
-                      <FiAward className="mr-1" />{item.level}
+                    <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold capitalize ${LEVEL_COLORS[item.level]}`}>
+                      <FiAward className="mr-0.5" />{item.level}
                     </span>
                   )}
                   {item.status && (
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold capitalize ${STATUS_COLORS[item.status]}`}>
+                    <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold capitalize ${STATUS_COLORS[item.status]}`}>
                       {item.status}
                     </span>
                   )}
                   {item.category &&
-                    <span className="inline-block px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200 text-xs font-semibold">
+                    <span className="inline-block px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-200 text-[10px] font-semibold">
                       {item.category}
                     </span>
                   }
                 </div>
                 {item.description && (
-                  <div className="text-sm text-gray-700 dark:text-gray-200 line-clamp-3">{item.description}</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">{item.description}</div>
                 )}
               </div>
-              <div className="flex gap-2 mt-4">
+              <div className="flex gap-2 mt-3 pt-2 border-t border-gray-100 dark:border-neutral-800">
                 <button
                   onClick={() => onEdit(item._id)}
-                  className="flex items-center gap-1 flex-1 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium text-sm transition"
+                  className="flex items-center justify-center gap-1 flex-1 px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium text-xs transition"
                 >
-                  <FiEdit2 /> Edit
+                  <FiEdit2 className="text-xs" /> Edit
                 </button>
                 <button
                   onClick={() => onDelete(item._id)}
-                  className="flex items-center gap-1 flex-1 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded font-medium text-sm transition"
+                  className="flex items-center justify-center gap-1 flex-1 px-2.5 py-1 bg-red-500 hover:bg-red-600 text-white rounded font-medium text-xs transition"
                 >
-                  <FiTrash2 /> Delete
+                  <FiTrash2 className="text-xs" /> Delete
                 </button>
               </div>
             </div>

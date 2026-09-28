@@ -11,39 +11,39 @@ export default function SkillList({ skills, onEdit, onDelete }) {
       ) : (
         skills.map((skill) => (
           <div key={skill._id}
-            className="bg-white dark:bg-neutral-900 p-5 rounded-2xl border border-gray-200 dark:border-neutral-700 flex flex-col shadow justify-between h-full transition hover:shadow-lg"
+            className="bg-white dark:bg-neutral-900 p-4 rounded-xl border border-gray-200 dark:border-neutral-700 flex flex-col shadow-sm justify-between h-full transition hover:shadow-md"
           >
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <FiTool className="text-blue-500 dark:text-blue-400" />
-                <h3 className="font-bold text-lg text-gray-900 dark:text-white">{skill.name}</h3>
+                <FiTool className="text-blue-500 dark:text-blue-400 text-sm" />
+                <h3 className="font-semibold text-sm text-gray-900 dark:text-white truncate">{skill.name}</h3>
               </div>
-              <div className="flex flex-wrap items-center gap-2 mt-2 min-h-[28px]">
+              <div className="flex flex-wrap items-center gap-1.5 mt-2">
                 {skill.category && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-xs font-medium w-fit">
-                    <FiLayers className="text-[14px]" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-[10px] font-medium w-fit">
+                    <FiLayers className="text-[12px]" />
                     {skill.category}
                   </span>
                 )}
-                <span className="inline-block px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs uppercase tracking-wide font-bold w-fit">
+                <span className="inline-block px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200 text-[10px] uppercase tracking-wide font-semibold w-fit">
                   {skill.level}
                 </span>
               </div>
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-2 mt-3">
+            <div className="flex gap-1.5 mt-3 pt-2.5 border-t border-gray-100 dark:border-neutral-800">
               <button
                 onClick={() => onEdit(skill._id)}
-                className="flex items-center gap-1 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition"
+                className="flex items-center gap-1 px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs font-medium transition"
               >
-                <FiEdit2 className="text-sm" /> Edit
+                <FiEdit2 className="text-xs" /> Edit
               </button>
               <button
                 onClick={() => onDelete(skill._id)}
-                className="flex items-center gap-1 px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-sm font-medium transition"
+                className="flex items-center gap-1 px-2.5 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-xs font-medium transition ml-auto"
               >
-                <FiTrash2 className="text-sm" /> Delete
+                <FiTrash2 className="text-xs" /> Delete
               </button>
             </div>
           </div>
