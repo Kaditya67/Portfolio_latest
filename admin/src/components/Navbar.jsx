@@ -38,31 +38,39 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
   // Desktop tab calculation
   useEffect(() => {
     const updateTabs = () => {
-      if (!navRef.current || !tabsContainerRef.current) return;
+      if (!navRef.current) return;
 
       const navWidth = navRef.current.offsetWidth;
-      const brandWidth = 220;
-      const userSectionWidth = window.innerWidth >= 768 ? 140 : 0;
-      const actionsBaseWidth = 120;
+      // Generous buffer for brand + theme toggle + user badge + logout button
+      const brandWidth = window.innerWidth >= 768 ? 190 : 150;
+      const userSectionWidth = window.innerWidth >= 1024 ? 160 : 0;
+      const actionsBaseWidth = 100; // theme toggle + logout + gaps
       const actionsWidth = actionsBaseWidth + userSectionWidth;
       const tabsArea = navWidth - brandWidth - actionsWidth - 40;
-      const moreButtonWidth = 80;
+      const moreButtonWidth = 90;
 
       let availableWidth = tabsArea - moreButtonWidth;
 
-      const getTabWidth = (label) => 60 + label.length * 8;
+      // Realistic tab width with icon + label + padding
+      const getTabWidth = (label) => 65 + label.length * 9;
       let usedWidth = 0;
       let vis = [];
       let hid = [];
 
       for (const tab of TABS) {
         const tabWidth = getTabWidth(tab.label);
-        if (usedWidth + tabWidth <= availableWidth && vis.length < 8) {
+        if (usedWidth + tabWidth <= availableWidth) {
           vis.push(tab);
           usedWidth += tabWidth;
         } else {
           hid.push(tab);
         }
+      }
+
+      // Ensure at least 1 tab is visible if possible
+      if (vis.length === 0 && TABS.length > 0) {
+        vis.push(TABS[0]);
+        hid = TABS.slice(1);
       }
 
       setVisibleTabs(vis);
@@ -93,32 +101,32 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
       {/* Desktop Navbar */}
       <nav
         ref={navRef}
-        className="hidden sm:flex items-center justify-between px-4 lg:px-6 py-2 sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm border-b border-gray-200/70 dark:border-gray-700/60"
+        className="hidden sm:flex items-center justify-between px-3 md:px-5 lg:px-6 py-2 sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-sm border-b border-gray-200/70 dark:border-gray-700/60 w-full overflow-hidden"
       >
         {/* Brand */}
-        <div className="flex items-center gap-2.5 flex-shrink-0" style={{ minWidth: "170px" }}>
-          <div className="relative">
+        <div className="flex items-center gap-2 flex-shrink-0 min-w-0 pr-2">
+          <div className="relative flex-shrink-0">
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-black text-sm text-white shadow-sm select-none">
               🛡
             </div>
             <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-white dark:border-gray-900" />
           </div>
-          <div className="flex flex-col ml-0.5">
-            <span className="font-bold text-base text-blue-700 dark:text-blue-200 leading-tight">Portfolio</span>
-            <span className="text-[10px] text-gray-500 dark:text-gray-400 -mt-0.5">Admin Panel</span>
+          <div className="flex flex-col ml-0.5 min-w-0">
+            <span className="font-bold text-sm md:text-base text-blue-700 dark:text-blue-200 leading-tight truncate">Portfolio</span>
+            <span className="text-[10px] text-gray-500 dark:text-gray-400 -mt-0.5 hidden md:inline">Admin Panel</span>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex-1 flex justify-center mx-2" ref={tabsContainerRef}>
-          <div className="flex items-center gap-0.5">
+        <div className="flex-1 flex justify-center mx-2 min-w-0 overflow-hidden" ref={tabsContainerRef}>
+          <div className="flex items-center gap-0.5 flex-nowrap overflow-hidden">
             {visibleTabs.map(({ label, icon: Icon, color }) => {
               const isActive = activeTab === label.toLowerCase();
               return (
                 <button
                   key={label}
                   onClick={() => setActiveTab(label.toLowerCase())}
-                  className={`group relative px-2.5 py-1.5 flex items-center gap-1.5 font-medium text-xs transition-all focus:outline-none whitespace-nowrap border-b-2
+                  className={`group relative px-2 py-1.5 flex items-center gap-1.5 font-medium text-xs transition-all focus:outline-none whitespace-nowrap border-b-2 flex-shrink-0
                     ${isActive
                       ? `border-blue-500 text-blue-600 dark:text-blue-400`
                       : `border-transparent text-gray-600 dark:text-gray-300 hover:text-blue-500 hover:border-blue-400`
@@ -127,7 +135,7 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
                   tabIndex={0}
                 >
                   <Icon
-                    className={`text-base transition-colors duration-200 ${
+                    className={`text-base flex-shrink-0 transition-colors duration-200 ${
                       isActive
                         ? color
                         : "text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400"
@@ -145,16 +153,16 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
             })}
 
             {hiddenTabs.length > 0 && (
-              <div className="relative" ref={desktopMoreRef}>
+              <div className="relative flex-shrink-0" ref={desktopMoreRef}>
                 <button
                   onClick={() => setShowDesktopMore(!showDesktopMore)}
-                  className="flex items-center gap-1 px-3 py-2 text-gray-500 dark:text-gray-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-gray-500 dark:text-gray-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition text-xs font-medium"
                   aria-haspopup="true"
                   aria-expanded={showDesktopMore ? "true" : "false"}
                   tabIndex={0}
                 >
-                  <FiChevronDown className={`text-sm transition ${showDesktopMore ? "rotate-180" : ""}`} />
-                  <span className="text-sm ml-1">More</span>
+                  <FiChevronDown className={`text-xs transition ${showDesktopMore ? "rotate-180" : ""}`} />
+                  <span>More ({hiddenTabs.length})</span>
                 </button>
 
                 {showDesktopMore && (
@@ -185,14 +193,14 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
         </div>
 
         {/* User + Actions */}
-        <div className="flex items-center gap-2 flex-shrink-0 justify-end">
+        <div className="flex items-center gap-2 flex-shrink-0 justify-end ml-auto">
           <ThemeToggle />
-          <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-lg bg-gray-50/50 dark:bg-gray-800/50">
-            <div className="h-8 w-8 rounded-full bg-blue-200 dark:bg-blue-700 flex items-center justify-center text-blue-800 dark:text-blue-200 font-bold text-xs uppercase">
+          <div className="hidden lg:flex items-center gap-2 px-2 py-1 rounded-lg bg-gray-50/50 dark:bg-gray-800/50 max-w-[160px]">
+            <div className="h-7 w-7 rounded-full bg-blue-200 dark:bg-blue-700 flex items-center justify-center text-blue-800 dark:text-blue-200 font-bold text-xs uppercase flex-shrink-0">
               {initials}
             </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-200 leading-tight">
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-200 leading-tight truncate">
                 {user?.email?.split('@')[0]}
               </span>
               <span className="text-[10px] text-gray-500 dark:text-gray-400 leading-tight">
@@ -202,94 +210,94 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
           </div>
           <button
             onClick={onLogout}
-            className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all shadow hover:shadow-lg"
+            className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all shadow hover:shadow-lg flex-shrink-0"
             aria-label="Logout"
+            title="Log out"
             tabIndex={0}
           >
-            <FiLogOut className="text-lg" />
+            <FiLogOut className="text-base" />
           </button>
         </div>
       </nav>
 
       {/* Mobile Navbar */}
-      <nav className="sm:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-[94vw] max-w-md">
-        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 px-3 py-2">
-          <div className="flex items-center justify-between">
+      <nav className="sm:hidden fixed bottom-3 left-1/2 transform -translate-x-1/2 z-50 w-[96vw] max-w-sm">
+        <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-xl border border-gray-200/80 dark:border-gray-700/80 px-2 py-1.5">
+          <div className="flex items-center justify-between gap-1">
             {/* Tabs */}
-            <div className="flex items-center justify-evenly flex-1 gap-1">
-              {TABS.slice(0, MOBILE_TAB_COUNT).map(({ label, icon: Icon, color }) => {
+            <div className="flex items-center justify-evenly flex-1 gap-1 min-w-0">
+              {TABS.slice(0, 3).map(({ label, icon: Icon, color }) => {
                 const isActive = activeTab === label.toLowerCase();
                 return (
                   <button
                     key={label}
                     onClick={() => setActiveTab(label.toLowerCase())}
-                    className={`flex flex-col items-center p-2 rounded-lg transition min-w-[60px]
-                      ${isActive ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 shadow" 
+                    className={`flex flex-col items-center py-1 px-1.5 rounded-lg transition flex-1 min-w-0
+                      ${isActive ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 shadow-sm" 
                                  : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"}`}
                     aria-label={label}
                     tabIndex={0}
                   >
-                    <Icon className={`text-lg ${isActive ? color : "text-gray-400"}`} />
-                    <span className="text-[9px] mt-0.5 font-medium">{label.slice(0, 3)}</span>
+                    <Icon className={`text-base ${isActive ? color : "text-gray-400"}`} />
+                    <span className="text-[9px] mt-0.5 font-medium truncate max-w-full">{label}</span>
                   </button>
                 );
               })}
             </div>
 
             {/* Mobile More + Logout */}
-            <div className="flex items-center gap-1 ml-2">
-              {TABS.length > MOBILE_TAB_COUNT && (
-                <div className="relative" ref={mobileMoreRef}>
-                  <button
-                    onClick={() => setShowMobileMore(!showMobileMore)}
-                    className="flex flex-col items-center p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 min-w-[50px]"
-                    aria-haspopup="true"
-                    aria-expanded={showMobileMore ? "true" : "false"}
-                    tabIndex={0}
-                  >
-                    <FiChevronDown className={`text-sm transition ${showMobileMore ? "rotate-180" : ""}`} />
-                    <span className="text-[9px] mt-0.5 font-medium">More</span>
-                  </button>
+            <div className="flex items-center gap-1 flex-shrink-0 pl-1 border-l border-gray-200 dark:border-gray-700">
+              <div className="relative" ref={mobileMoreRef}>
+                <button
+                  onClick={() => setShowMobileMore(!showMobileMore)}
+                  className="flex flex-col items-center py-1 px-1.5 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  aria-haspopup="true"
+                  aria-expanded={showMobileMore ? "true" : "false"}
+                  tabIndex={0}
+                >
+                  <FiChevronDown className={`text-base transition ${showMobileMore ? "rotate-180" : ""}`} />
+                  <span className="text-[9px] mt-0.5 font-medium">More</span>
+                </button>
 
-                  {showMobileMore && (
-                    <div className="absolute bottom-full mb-2 right-0 w-44 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-1 z-[9999] pointer-events-auto">
-                      {TABS.slice(MOBILE_TAB_COUNT).map(({ label, icon: Icon, color }) => {
-                        const isActive = activeTab === label.toLowerCase();
-                        return (
-                          <button
-                            key={label}
-                            onClick={() => {
-                              setActiveTab(label.toLowerCase());
-                              setShowMobileMore(false);
-                            }}
-                            className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition hover:bg-blue-100 dark:hover:bg-blue-900 rounded
-                              ${isActive ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300"
-                                        : "text-gray-600 dark:text-gray-300"}`}
-                            tabIndex={0}
-                          >
-                            <Icon className={`text-base ${color}`} />
-                            <span>{label}</span>
-                          </button>
-                        );
-                      })}
-                      <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-700 mt-1 flex items-center">
-                        <ThemeToggle small />
-                        <span className="ml-2 text-sm text-gray-700 dark:text-gray-200 font-medium">Theme</span>
-                      </div>
+                {showMobileMore && (
+                  <div className="absolute bottom-full mb-3 right-0 w-48 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 py-1.5 z-[9999] pointer-events-auto max-h-[70vh] overflow-y-auto">
+                    {TABS.slice(3).map(({ label, icon: Icon, color }) => {
+                      const isActive = activeTab === label.toLowerCase();
+                      return (
+                        <button
+                          key={label}
+                          onClick={() => {
+                            setActiveTab(label.toLowerCase());
+                            setShowMobileMore(false);
+                          }}
+                          className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs transition hover:bg-blue-50 dark:hover:bg-blue-900/50 rounded
+                            ${isActive ? "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-semibold"
+                                      : "text-gray-600 dark:text-gray-300"}`}
+                          tabIndex={0}
+                        >
+                          <Icon className={`text-base ${color}`} />
+                          <span>{label}</span>
+                        </button>
+                      );
+                    })}
+                    <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-700 mt-1 flex items-center justify-between">
+                      <span className="text-xs text-gray-700 dark:text-gray-200 font-medium">Theme</span>
+                      <ThemeToggle />
                     </div>
-                  )}
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
 
               {/* Logout */}
               <button
                 onClick={onLogout}
-                className="flex flex-col items-center p-2 rounded-lg text-red-500 hover:bg-red-100 dark:hover:bg-red-900 transition min-w-[50px]"
+                className="flex flex-col items-center py-1 px-2 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition flex-shrink-0"
                 aria-label="Logout"
+                title="Log out"
                 tabIndex={0}
               >
-                <FiLogOut className="text-lg" />
-                <span className="text-[9px] mt-0.5 font-medium">Out</span>
+                <FiLogOut className="text-base" />
+                <span className="text-[9px] mt-0.5 font-medium text-red-500">Exit</span>
               </button>
             </div>
           </div>

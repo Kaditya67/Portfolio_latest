@@ -46,7 +46,7 @@ export default function DashboardPage() {
           <span className="ml-3 text-lg">Loading...</span>
         </div>
       ) : (
-        <main className="px-3 py-4 sm:px-6 sm:py-6 max-w-5xl mx-auto">
+        <main className="px-3 pt-4 pb-24 sm:px-6 sm:py-6 max-w-5xl mx-auto">
           <div className="rounded-xl shadow-sm bg-card dark:bg-neutral-800 border border-border dark:border-neutral-700 p-4 sm:p-6 min-h-[60vh] transition-all">
             {ActiveComponent && <ActiveComponent />}
           </div>
