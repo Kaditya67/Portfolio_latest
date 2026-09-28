@@ -54,8 +54,22 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-background text-foreground dark:bg-neutral-900 dark:text-white">
-        <p className="text-destructive text-sm">{error || "Project not found."}</p>
+      <main className="min-h-[70vh] flex items-center justify-center bg-background text-foreground dark:bg-neutral-900 dark:text-white px-4 py-16">
+        <div className="text-center max-w-md">
+          <div className="inline-flex p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 mb-4 border border-amber-200 dark:border-amber-800">
+            <span className="text-2xl">🔍</span>
+          </div>
+          <h2 className="text-xl font-bold mb-2">Project Not Found</h2>
+          <p className="text-xs text-muted-foreground dark:text-gray-400 mb-6 leading-relaxed">
+            The project "{slug}" could not be located or may have been updated.
+          </p>
+          <Link
+            to="/projects"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium transition"
+          >
+            ← Browse All Projects
+          </Link>
+        </div>
       </main>
     )
   }

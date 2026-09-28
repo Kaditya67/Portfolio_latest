@@ -105,12 +105,12 @@ export default function ProjectsPage() {
                             {project.description}
                           </p>
 
-                          {project.technologies?.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 mb-3">
-                              {project.technologies.slice(0, 3).map((tech) => (
+                          {((project.technologies && project.technologies.length > 0) || (project.tech && project.tech.length > 0)) && (
+                            <div className="flex flex-wrap gap-1 mb-3">
+                              {(project.technologies || project.tech).slice(0, 4).map((tech) => (
                                 <span
                                   key={tech}
-                                  className="inline-block px-2.5 py-0.5 text-[11px] font-medium bg-primary/10 text-primary rounded-full"
+                                  className="inline-block px-2 py-0.5 text-[10px] font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-blue-300 rounded-md"
                                 >
                                   {tech}
                                 </span>
@@ -126,7 +126,7 @@ export default function ProjectsPage() {
                                   className="text-[11px] text-muted-foreground dark:text-gray-400 flex items-start gap-1.5"
                                 >
                                   <span className="text-primary">•</span>
-                                  <span>{h}</span>
+                                  <span className="line-clamp-1">{h}</span>
                                 </li>
                               ))}
                             </ul>

@@ -16,6 +16,7 @@ const LearningPage = lazy(() => import('./pages/learning/index.jsx'));
 const Certificates = lazy(() => import('./pages/certificates/index.jsx'));
 const GalleryPage = lazy(() => import('./pages/gallery/index.jsx'));
 const Resume = lazy(() => import('./pages/resume/index.jsx'));
+const NotFoundPage = lazy(() => import('./pages/notFound/index.jsx'));
 
 // Loading component
 const PageLoader = () => (
@@ -43,6 +44,7 @@ function App() {
               <Route path="/certificates" element={<Certificates />} />
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/resume" element={<Resume />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </main>
