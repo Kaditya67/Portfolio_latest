@@ -101,7 +101,7 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
       {/* Desktop Navbar */}
       <nav
         ref={navRef}
-        className="hidden sm:flex items-center justify-between px-3 md:px-5 lg:px-6 py-2 sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-sm border-b border-gray-200/70 dark:border-gray-700/60 w-full overflow-hidden"
+        className="hidden sm:flex items-center justify-between px-3 md:px-5 lg:px-6 py-2 sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-sm border-b border-gray-200/70 dark:border-gray-700/60 w-full"
       >
         {/* Brand */}
         <div className="flex items-center gap-2.5 flex-shrink-0 min-w-0 pr-2">
@@ -124,8 +124,8 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
         </div>
 
         {/* Tabs */}
-        <div className="flex-1 flex justify-center mx-2 min-w-0 overflow-hidden" ref={tabsContainerRef}>
-          <div className="flex items-center gap-0.5 flex-nowrap overflow-hidden">
+        <div className="flex-1 flex justify-center mx-2 min-w-0" ref={tabsContainerRef}>
+          <div className="flex items-center gap-0.5 flex-nowrap">
             {visibleTabs.map(({ label, icon: Icon, color }) => {
               const isActive = activeTab === label.toLowerCase();
               return (
@@ -161,33 +161,35 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
             {hiddenTabs.length > 0 && (
               <div className="relative flex-shrink-0" ref={desktopMoreRef}>
                 <button
-                  onClick={() => setShowDesktopMore(!showDesktopMore)}
-                  className="flex items-center gap-1 px-2.5 py-1.5 text-gray-500 dark:text-gray-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition text-xs font-medium"
+                  type="button"
+                  onClick={() => setShowDesktopMore((prev) => !prev)}
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition text-xs font-medium cursor-pointer"
                   aria-haspopup="true"
                   aria-expanded={showDesktopMore ? "true" : "false"}
                   tabIndex={0}
                 >
-                  <FiChevronDown className={`text-xs transition ${showDesktopMore ? "rotate-180" : ""}`} />
+                  <FiChevronDown className={`text-xs transition-transform duration-200 ${showDesktopMore ? "rotate-180" : ""}`} />
                   <span>More ({hiddenTabs.length})</span>
                 </button>
 
                 {showDesktopMore && (
-                  <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 py-2 z-50">
+                  <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 py-1.5 z-[100]">
                     {hiddenTabs.map(({ label, icon: Icon, color }) => {
                       const isActive = activeTab === label.toLowerCase();
                       return (
                         <button
                           key={label}
+                          type="button"
                           onClick={() => {
                             setActiveTab(label.toLowerCase());
-                            setTimeout(() => setShowDesktopMore(false), 150);
+                            setShowDesktopMore(false);
                           }}
-                          className={`w-full flex items-center gap-3 px-4 py-2 text-sm transition hover:bg-blue-100 dark:hover:bg-blue-900 rounded
-                            ${isActive ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300' : 'text-gray-600 dark:text-gray-300'}`}
+                          className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs transition hover:bg-blue-50 dark:hover:bg-blue-900/50 cursor-pointer
+                            ${isActive ? 'bg-blue-50 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-semibold' : 'text-gray-700 dark:text-gray-200'}`}
                           tabIndex={0}
                         >
-                          <Icon className={`text-lg ${color}`} />
-                          <span>{label}</span>
+                          <Icon className={`text-base flex-shrink-0 ${color}`} />
+                          <span className="truncate">{label}</span>
                         </button>
                       );
                     })}
