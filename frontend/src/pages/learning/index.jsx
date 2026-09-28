@@ -197,20 +197,6 @@ export default function LearningPage() {
       <Section title="What I'm Learning" subtitle="Topics I'm exploring and improving.">
         <LearningTimeline learning={learning} />
       </Section>
-
-      <style jsx>{`
-        @keyframes drawLine {
-          from {
-            stroke-dashoffset: 1000;
-          }
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-        .animate-draw {
-          animation: drawLine 2s ease-in-out forwards;
-        }
-      `}</style>
     </main>
   );
 }
