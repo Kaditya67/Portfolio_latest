@@ -53,11 +53,17 @@ export default function LoginPage() {
         flex flex-col items-center transition-colors duration-300"
       >
         {/* Logo / Brand */}
-        <div className="flex flex-col items-center gap-1 mb-4">
-          <div className="h-12 w-12 rounded-full bg-blue-200 dark:bg-blue-950 flex items-center justify-center shadow-sm">
-            <span className="text-2xl font-bold text-blue-800 dark:text-blue-200 select-none">🛡</span>
+        <div className="flex flex-col items-center gap-2 mb-6">
+          <div className="h-12 w-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-md ring-1 ring-black/5 text-white">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="4 17 10 11 4 5" />
+              <line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
           </div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-blue-100">Portfolio Admin</h1>
+          <div className="text-center">
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Portfolio Admin</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sign in to manage your portfolio</p>
+          </div>
         </div>
 
         <form

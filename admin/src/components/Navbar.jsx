@@ -104,16 +104,22 @@ export default function Navbar({ user, activeTab, setActiveTab, onLogout }) {
         className="hidden sm:flex items-center justify-between px-3 md:px-5 lg:px-6 py-2 sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-sm border-b border-gray-200/70 dark:border-gray-700/60 w-full overflow-hidden"
       >
         {/* Brand */}
-        <div className="flex items-center gap-2 flex-shrink-0 min-w-0 pr-2">
+        <div className="flex items-center gap-2.5 flex-shrink-0 min-w-0 pr-2">
           <div className="relative flex-shrink-0">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-black text-sm text-white shadow-sm select-none">
-              🛡
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="4 17 10 11 4 5" />
+                <line x1="12" y1="19" x2="20" y2="19" />
+              </svg>
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-green-400 border-2 border-white dark:border-gray-900" />
+            <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-500 border-2 border-white dark:border-gray-900" />
           </div>
-          <div className="flex flex-col ml-0.5 min-w-0">
-            <span className="font-bold text-sm md:text-base text-blue-700 dark:text-blue-200 leading-tight truncate">Portfolio</span>
-            <span className="text-[10px] text-gray-500 dark:text-gray-400 -mt-0.5 hidden md:inline">Admin Panel</span>
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-sm md:text-base text-gray-900 dark:text-white leading-tight tracking-tight">Portfolio</span>
+              <span className="text-[9px] font-semibold uppercase tracking-wider px-1 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">Admin</span>
+            </div>
+            <span className="text-[10px] text-gray-500 dark:text-gray-400 -mt-0.5 hidden md:inline">Console & Content</span>
           </div>
         </div>
 
