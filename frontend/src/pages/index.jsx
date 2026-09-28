@@ -53,38 +53,38 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-background text-foreground dark:bg-neutral-900 dark:text-white">
       {/* Hero Section */}
-      <section className="mx-auto max-w-6xl px-4 pt-10 pb-14 md:pt-14 md:pb-20">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+      <section className="mx-auto max-w-5xl px-4 pt-8 pb-10 md:pt-10 md:pb-14">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-center">
           {profile && (
-            <Link to="/about" tabIndex={0}>
+            <Link to="/about" tabIndex={0} className="flex-shrink-0">
               <img
                 src={profile.avatarUrl || "/profile-portrait.png"}
                 alt={profile.name || "Profile"}
-                className="h-48 w-48 md:h-60 md:w-60 rounded-full border border-border object-cover cursor-pointer focus:ring-2 focus:ring-accent"
+                className="h-32 w-32 sm:h-36 sm:w-36 md:h-44 md:w-44 rounded-full border border-border object-cover cursor-pointer focus:ring-2 focus:ring-accent shadow-sm"
               />
             </Link>
           )}
 
-          <div className="flex-1">
-            <h1 className="text-3xl md:text-4xl font-semibold text-balance">
+          <div className="flex-1 text-center md:text-left">
+            <h1 className="text-2xl md:text-3xl font-semibold text-balance">
               Hi, I’m {profile?.name || "Visitor"}
               {profile?.headline ? ` — ${profile.headline}` : ""}
             </h1>
 
-            <p className="mt-3 text-muted-foreground dark:text-gray-300">
+            <p className="mt-2 text-sm text-muted-foreground dark:text-gray-300 leading-relaxed max-w-xl">
               {profile?.bio || "Welcome to my portfolio."}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-2.5">
               <Link
                 to="/projects"
-                className="rounded-md border border-border bg-card dark:bg-neutral-800 px-4 py-2 hover:bg-accent dark:hover:bg-gray-700 transition"
+                className="text-xs font-medium rounded-md border border-border bg-card dark:bg-neutral-800 px-3.5 py-1.5 hover:bg-accent dark:hover:bg-gray-700 transition"
               >
                 View Projects
               </Link>
               <Link
                 to="/resume"
-                className="rounded-md border border-border bg-card dark:bg-neutral-800 px-4 py-2 hover:bg-accent dark:hover:bg-gray-700 transition"
+                className="text-xs font-medium rounded-md border border-border bg-card dark:bg-neutral-800 px-3.5 py-1.5 hover:bg-accent dark:hover:bg-gray-700 transition"
               >
                 Resume
               </Link>

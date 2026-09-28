@@ -109,19 +109,19 @@ const GalleryPage = () => {
                   <img
                     src={m.imageUrl || "/placeholder.svg"}
                     alt={m.title || "Media"}
-                    className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="h-44 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <figcaption className="p-4">
-                  <div className="text-sm font-semibold line-clamp-2">
+                <figcaption className="p-3">
+                  <div className="text-xs font-semibold line-clamp-1">
                     {m.title}
                   </div>
                   {m.tags?.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-1 text-xs text-muted-foreground">
+                    <div className="mt-1.5 flex flex-wrap gap-1 text-[11px] text-muted-foreground">
                       {m.tags.sort().map((tag, i) => (
                         <span
                           key={i}
-                          className="px-2 py-1 rounded-full border border-border dark:border-gray-600 bg-background dark:bg-neutral-700"
+                          className="px-1.5 py-0.5 rounded-full border border-border dark:border-gray-600 bg-background dark:bg-neutral-700"
                         >
                           {tag}
                         </span>
@@ -133,7 +133,7 @@ const GalleryPage = () => {
             ))}
           </div>
         ) : (
-          <p className="text-muted dark:text-neutral-400 text-center">
+          <p className="text-gray-500 dark:text-neutral-400 text-center text-sm">
             No media found.
           </p>
         )}

@@ -92,25 +92,25 @@ export default function ExperiencePage() {
                 
                 {/* Experience Card */}
                 <div className={`ml-12 md:ml-0 ${index % 2 === 0 ? 'md:mr-1/2 md:pr-8' : 'md:ml-1/2 md:pl-8'}`}>
-                  <div className="bg-card dark:bg-neutral-800 rounded-xl border border-border dark:border-gray-700 p-6 hover:shadow-lg transition-all duration-300 group">
+                  <div className="bg-card dark:bg-neutral-800 rounded-lg border border-border dark:border-gray-700 p-4 sm:p-5 hover:shadow-md transition-all duration-200 group">
                     
                     {/* Header */}
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 mb-4">
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-2 mb-3">
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-foreground dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        <h3 className="text-base font-bold text-foreground dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                           {exp.role}
                         </h3>
-                        <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold mt-1">{exp.org}</p>
-                        <div className="flex flex-wrap items-center gap-2 mt-2">
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                        <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mt-0.5">{exp.org}</p>
+                        <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                             {exp.start} — {exp.end}
                           </span>
                           {exp.location && (
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">
                               {exp.location}
                             </span>
                           )}
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
                             {calculateDuration(exp.start, exp.end, exp.current)}
                           </span>
                         </div>
@@ -118,22 +118,22 @@ export default function ExperiencePage() {
 
                       {/* Current Role Badge */}
                       {exp.current && (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                          <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+                          <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
                           Current Role
                         </span>
                       )}
                     </div>
 
                     {/* Responsibilities */}
-                    <div className="mt-4">
-                      <h4 className="text-sm font-semibold text-foreground mb-3 uppercase tracking-wide text-muted-foreground dark:text-gray-400">
+                    <div className="mt-3">
+                      <h4 className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground dark:text-gray-400 mb-2">
                         Key Responsibilities & Achievements
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1.5">
                         {exp.bullets.map((bullet, i) => (
-                          <li key={i} className="flex items-start text-sm text-muted-foreground dark:text-gray-300">
-                            <span className="mr-2">•</span>
+                          <li key={i} className="flex items-start text-xs text-muted-foreground dark:text-gray-300 leading-relaxed">
+                            <span className="mr-1.5 text-blue-500">•</span>
                             <span>{bullet}</span>
                           </li>
                         ))}

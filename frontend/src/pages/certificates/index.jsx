@@ -43,21 +43,21 @@ const Certificates = () => {
         subtitle="Selected certifications and badges that highlight my skills."
       >
         {loading ? (
-          <p className="text-muted dark:text-neutral-400 text-center animate-pulse">
+          <p className="text-gray-500 dark:text-neutral-400 text-center animate-pulse text-sm">
             Loading certificates...
           </p>
         ) : error ? (
-          <p className="text-red-500 text-center">
+          <p className="text-red-500 text-center text-sm">
             Failed to load certificates. Please try again later.
           </p>
         ) : certificates.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {certificates.map((cert) => (
               <CertificateCard key={cert.id || cert._id} cert={cert} />
             ))}
           </div>
         ) : (
-          <p className="text-muted dark:text-neutral-400 text-center">
+          <p className="text-gray-500 dark:text-neutral-400 text-center text-sm">
             No certificates found.
           </p>
         )}

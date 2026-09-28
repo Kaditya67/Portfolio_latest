@@ -52,10 +52,10 @@ export default function ProjectDetail() {
     )
   }
 
-  if (error || !project) {
+  if (!project) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-background text-foreground dark:bg-neutral-900 dark:text-white">
-        <p className="text-destructive">{error || "Project not found."}</p>
+        <p className="text-destructive text-sm">{error || "Project not found."}</p>
       </main>
     )
   }
@@ -66,16 +66,16 @@ export default function ProjectDetail() {
   const image = project.imageUrl || project.image
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12 min-h-screen bg-background text-foreground dark:bg-neutral-900 dark:text-white">
+    <main className="mx-auto max-w-3xl px-4 py-8 min-h-screen bg-background text-foreground dark:bg-neutral-900 dark:text-white">
       <Link
         to="/projects"
-        className="text-sm underline underline-offset-4 hover:text-primary dark:text-gray-400 dark:hover:text-primary mb-6 inline-block"
+        className="text-xs underline underline-offset-4 hover:text-primary dark:text-gray-400 dark:hover:text-primary mb-4 inline-block"
       >
         ← Back to projects
       </Link>
 
-      <h1 className="text-4xl font-bold mt-4">{name}</h1>
-      <p className="mt-3 text-lg text-muted-foreground dark:text-gray-300">{project.description}</p>
+      <h1 className="text-2xl md:text-3xl font-bold mt-2">{name}</h1>
+      <p className="mt-2 text-sm text-muted-foreground dark:text-gray-300 leading-relaxed">{project.description}</p>
 
       {image && (
         <img

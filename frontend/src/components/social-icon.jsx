@@ -16,6 +16,8 @@ const ICON_MAP = {
   linkedin: Linkedin,
   twitter: Twitter,
   website: Globe,
+  site: Globe,
+  mail: Mail,
 };
 
   let arr = Array.isArray(socials)

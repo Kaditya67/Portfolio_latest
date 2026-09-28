@@ -86,23 +86,22 @@ const About = () => {
         title="About Me"
         subtitle="A detailed snapshot of my background, interests, and skills."
       >
-        <div className="max-w-4xl bg-white/60 dark:bg-neutral-800/60 p-6 md:p-10 rounded-2xl shadow-xl relative mb-12">
-          <div className="flex flex-col md:flex-row gap-8 items-center">
+        <div className="max-w-4xl bg-white/70 dark:bg-neutral-800/70 p-5 md:p-7 rounded-xl border border-border shadow-sm mb-8">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
             <img
               src={image || "/student-coding-desk.jpg"}
               alt="Profile"
-              className="rounded-full border-4 border-cyan-200 w-32 h-32 md:w-40 md:h-40 object-cover shadow-lg -mt-8"
-              style={{ marginBottom: "-2rem" }}
+              className="rounded-full border-2 border-border w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-cover shadow-sm flex-shrink-0"
             />
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex-1 flex flex-col gap-2 text-center md:text-left">
               {background && (
-                <p className="text-base text-muted-foreground dark:text-gray-300 leading-relaxed mt-2">{background}</p>
+                <p className="text-sm text-muted-foreground dark:text-gray-300 leading-relaxed">{background}</p>
               )}
 
               {Array.isArray(highlights) && highlights.length > 0 && (
-                <div className="mt-4">
-                  <div className="text-xs font-semibold uppercase mb-1 text-cyan-500 tracking-wide">Highlights</div>
-                  <ul className="list-disc pl-5 space-y-1 text-cyan-700 dark:text-cyan-300 text-sm">
+                <div className="mt-3">
+                  <div className="text-[11px] font-semibold uppercase mb-1.5 text-primary tracking-wide">Highlights</div>
+                  <ul className="list-disc pl-5 space-y-0.5 text-muted-foreground dark:text-gray-300 text-xs">
                     {highlights.map((item, i) => <li key={item + i}>{item}</li>)}
                   </ul>
                 </div>

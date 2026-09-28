@@ -9,7 +9,14 @@ function groupSkills(skillsArr) {
   if (!Array.isArray(skillsArr)) return [];
   const groups = {};
   skillsArr.forEach(skill => {
-    const cat = skill.category || "Other";
+    if (skill?.category && Array.isArray(skill.items)) {
+      if (!groups[skill.category]) groups[skill.category] = [];
+      skill.items.forEach(item => {
+        groups[skill.category].push(typeof item === "string" ? { name: item, level: "intermediate" } : item);
+      });
+      return;
+    }
+    const cat = skill?.category || "Other";
     if (!groups[cat]) groups[cat] = [];
     groups[cat].push(skill);
   });
@@ -18,7 +25,7 @@ function groupSkills(skillsArr) {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([category, items]) => ({ 
       category, 
-      items: items.sort((a, b) => a.name.localeCompare(b.name))
+      items: items.sort((a, b) => (a?.name || "").localeCompare(b?.name || ""))
     }));
 }
 

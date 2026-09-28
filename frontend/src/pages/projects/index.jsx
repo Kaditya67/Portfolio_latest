@@ -78,16 +78,16 @@ export default function ProjectsPage() {
                 (a, b) => new Date(b.createdAt) - new Date(a.createdAt) // Newest first
               )
               return (
-                <div key={category} className="mb-12">
-                  <h2 className="text-2xl font-semibold mb-6">{category}</h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div key={category} className="mb-10">
+                  <h2 className="text-xl font-semibold mb-4 text-foreground dark:text-white">{category}</h2>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {projectsInCategory.map((project) => (
                       <div
                         key={project.slug || project._id}
-                        className="group flex flex-col h-full rounded-xl border border-border bg-card dark:bg-neutral-800 hover:border-primary/50 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg"
+                        className="group flex flex-col h-full rounded-lg border border-border bg-card dark:bg-neutral-800 hover:border-primary/50 transition-all duration-200 overflow-hidden shadow-sm hover:shadow-md"
                       >
                         {project.imageUrl && (
-                          <div className="relative w-full h-48 bg-muted overflow-hidden">
+                          <div className="relative w-full h-40 bg-muted overflow-hidden">
                             <img
                               src={project.imageUrl}
                               alt={project.title}
@@ -96,21 +96,21 @@ export default function ProjectsPage() {
                           </div>
                         )}
 
-                        <div className="flex flex-col flex-grow p-6">
-                          <h3 className="font-semibold text-xl mb-2 text-foreground dark:text-white group-hover:text-primary transition-colors">
+                        <div className="flex flex-col flex-grow p-4 sm:p-5">
+                          <h3 className="font-semibold text-base mb-1.5 text-foreground dark:text-white group-hover:text-primary transition-colors">
                             {project.title}
                           </h3>
 
-                          <p className="text-sm text-muted-foreground dark:text-gray-300 mb-4 flex-grow">
+                          <p className="text-xs text-muted-foreground dark:text-gray-300 mb-3 flex-grow line-clamp-2">
                             {project.description}
                           </p>
 
                           {project.technologies?.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-4">
+                            <div className="flex flex-wrap gap-1.5 mb-3">
                               {project.technologies.slice(0, 3).map((tech) => (
                                 <span
                                   key={tech}
-                                  className="inline-block px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+                                  className="inline-block px-2.5 py-0.5 text-[11px] font-medium bg-primary/10 text-primary rounded-full"
                                 >
                                   {tech}
                                 </span>
@@ -119,26 +119,26 @@ export default function ProjectsPage() {
                           )}
 
                           {project.highlights?.length > 0 && (
-                            <ul className="mb-4 space-y-1">
+                            <ul className="mb-3 space-y-0.5">
                               {project.highlights.slice(0, 2).map((h) => (
                                 <li
                                   key={h}
-                                  className="text-xs text-muted-foreground dark:text-gray-400 flex items-start gap-2"
+                                  className="text-[11px] text-muted-foreground dark:text-gray-400 flex items-start gap-1.5"
                                 >
-                                  <span className="text-primary mt-1">•</span>
+                                  <span className="text-primary">•</span>
                                   <span>{h}</span>
                                 </li>
                               ))}
                             </ul>
                           )}
 
-                          <div className="flex gap-3 mt-auto pt-4 border-t border-border dark:border-gray-700">
+                          <div className="flex gap-3 mt-auto pt-3 border-t border-border dark:border-gray-700 text-xs">
                             {project.repoUrl && (
                               <a
                                 href={project.repoUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-sm font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
+                                className="font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-0.5"
                               >
                                 GitHub →
                               </a>
@@ -148,14 +148,14 @@ export default function ProjectsPage() {
                                 href={project.demoUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-sm font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-1"
+                                className="font-medium text-primary hover:text-primary/80 transition-colors flex items-center gap-0.5"
                               >
                                 Live Demo →
                               </a>
                             )}
                             <Link
                               to={`/projects/${project.slug}`}
-                              className="text-sm font-medium text-muted-foreground dark:text-gray-400 hover:text-foreground dark:hover:text-white transition-colors ml-auto"
+                              className="font-medium text-muted-foreground dark:text-gray-400 hover:text-foreground dark:hover:text-white transition-colors ml-auto"
                             >
                               Details →
                             </Link>
