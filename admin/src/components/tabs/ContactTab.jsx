@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/client";
 import { ContactList } from "../lists/ContactList";
-import { FiMail} from "react-icons/fi";
+import { FiMail, FiLoader } from "react-icons/fi";
 
 export default function ContactTab() {
   const [items, setItems] = useState([]);
@@ -82,8 +82,8 @@ export default function ContactTab() {
 
       {loading ? (
         <div className="flex items-center justify-center h-24 text-gray-600 dark:text-gray-300">
-          <FiMail className="animate-spin mr-2 text-2xl" />
-          Loading messages...
+          <FiLoader className="animate-spin text-2xl mr-2 text-green-600 dark:text-green-400" />
+          <span className="text-base">Loading messages...</span>
         </div>
       ) : (
         <ContactList

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { api } from "../../api/client";
 import CertificateList from "../lists/CertificateList";
 import CertificateForm from "../forms/CertificateForm";
-import { FiAward, FiPlus, FiX } from "react-icons/fi";
+import { FiAward, FiPlus, FiX, FiLoader } from "react-icons/fi";
 
 export default function CertificatesTab() {
   const [items, setItems] = useState([]);
@@ -115,7 +115,7 @@ export default function CertificatesTab() {
 
       {loading ? (
         <div className="flex justify-center items-center h-24 text-gray-600 dark:text-gray-300">
-          <FiAward className="animate-spin text-xl mr-2 text-red-500" />
+          <FiLoader className="animate-spin text-2xl mr-2 text-red-500" />
           <span className="text-base">Loading certificates...</span>
         </div>
       ) : (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/client";
-import { FiUser, FiEdit2, FiX } from "react-icons/fi";
+import { FiUser, FiEdit2, FiX, FiLoader } from "react-icons/fi";
 import AboutForm from "../forms/AboutForm";
 
 // Updated FieldGroup for skills objects
@@ -93,8 +93,8 @@ export default function AboutTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-32 text-gray-600 dark:text-gray-300">
-        <FiUser className="animate-spin text-2xl mr-2" />
-        Loading about info...
+        <FiLoader className="animate-spin text-2xl mr-2 text-indigo-600 dark:text-indigo-400" />
+        <span className="text-base">Loading about info...</span>
       </div>
     );
   }

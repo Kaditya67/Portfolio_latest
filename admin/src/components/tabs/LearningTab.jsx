@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/client";
-import { FiBookOpen, FiPlus, FiX } from "react-icons/fi";
+import { FiBookOpen, FiPlus, FiX, FiLoader } from "react-icons/fi";
 import LearningList from "../lists/LearningList";
 import LearningForm from "../forms/LearningForm";
 
@@ -115,7 +115,7 @@ export default function LearningTab() {
 
       {loading ? (
         <div className="flex justify-center items-center h-24 text-gray-600 dark:text-gray-300">
-          <FiBookOpen className="animate-spin text-xl mr-2 text-purple-500" />
+          <FiLoader className="animate-spin text-2xl mr-2 text-purple-500" />
           <span className="text-base">Loading learning...</span>
         </div>
       ) : (

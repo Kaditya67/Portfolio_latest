@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/client";
-import { FiUser, FiEdit2, FiX, FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiGlobe, FiTwitter, FiInstagram } from "react-icons/fi";
+import { FiUser, FiEdit2, FiX, FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiGlobe, FiTwitter, FiInstagram, FiLoader } from "react-icons/fi";
 import ProfileForm from "../forms/ProfileForm";
 
 function getSocialIcon(key) {
@@ -51,8 +51,8 @@ export default function ProfileTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-32 text-gray-600 dark:text-gray-300">
-        <FiUser className="animate-spin text-2xl mr-2" />
-        Loading profile...
+        <FiLoader className="animate-spin text-2xl mr-2 text-cyan-600 dark:text-cyan-400" />
+        <span className="text-base">Loading profile...</span>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/client";
-import { FiBriefcase, FiPlus, FiX } from "react-icons/fi";
+import { FiBriefcase, FiPlus, FiX, FiLoader } from "react-icons/fi";
 import ExperienceList from "../lists/ExperienceList";
 import ExperienceForm from "../forms/ExperienceForm";
 
@@ -118,7 +118,7 @@ export default function ExperienceTab() {
 
       {loading ? (
         <div className="flex justify-center items-center h-24 text-gray-600 dark:text-gray-300">
-          <FiBriefcase className="animate-spin mr-2 text-xl text-emerald-600 dark:text-emerald-400" />
+          <FiLoader className="animate-spin mr-2 text-2xl text-emerald-600 dark:text-emerald-400" />
           <span className="text-base">Loading experience...</span>
         </div>
       ) : (

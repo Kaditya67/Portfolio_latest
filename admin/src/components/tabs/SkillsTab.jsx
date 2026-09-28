@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { api } from "../../api/client";
 import SkillForm from "../forms/SkillForm";
 import SkillList from "../lists/SkillList";
-import { FiTool, FiPlus, FiX } from "react-icons/fi";
+import { FiTool, FiPlus, FiX, FiLoader } from "react-icons/fi";
 
 export default function SkillsTab() {
   const [skills, setSkills] = useState([]);
@@ -121,8 +121,8 @@ export default function SkillsTab() {
       )}
       {/* Loading / Skill List */}
       {loading ? (
-        <div className="flex justify-center items-center h-24 text-gray-600 dark:text-gray-300 gap-2">
-          <FiTool className="animate-spin text-xl text-blue-600 dark:text-blue-400" />
+        <div className="flex justify-center items-center h-24 text-gray-600 dark:text-gray-300">
+          <FiLoader className="animate-spin text-2xl mr-2 text-blue-600 dark:text-blue-400" />
           <span className="text-base">Loading skills...</span>
         </div>
       ) : (

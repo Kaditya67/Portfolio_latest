@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../../api/client";
 
-import { FiImage, FiPlus, FiX } from "react-icons/fi";
+import { FiImage, FiPlus, FiX, FiLoader } from "react-icons/fi";
 import MediaForm from "../forms/MediaForm";
 import MediaList from "../lists/MediaList";
 
@@ -116,7 +116,7 @@ export default function MediaTab() {
 
       {loading ? (
         <div className="flex justify-center items-center h-24 text-gray-600 dark:text-gray-300">
-          <FiImage className="animate-spin text-xl mr-2 text-pink-500" />
+          <FiLoader className="animate-spin text-2xl mr-2 text-pink-500" />
           <span className="text-base">Loading media...</span>
         </div>
       ) : (
