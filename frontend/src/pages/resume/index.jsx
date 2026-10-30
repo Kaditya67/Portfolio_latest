@@ -1,7 +1,9 @@
 import React from "react";
 
 const Resume = () => {
-  const resumeUrl = "/resume.pdf"; // Ensure file is in /public
+  // Central resume hosted directly on GitHub profile repository (Kaditya67/kaditya67)
+  // Updating resume.pdf in kaditya67 repo updates all portfolio deployments automatically
+  const resumeUrl = "https://raw.githubusercontent.com/Kaditya67/kaditya67/main/Resume_Aditya_Ojha.pdf";
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-background text-foreground dark:bg-neutral-900 dark:text-white transition-colors duration-300">
