@@ -1,10 +1,11 @@
 import React from "react";
 
 const Resume = () => {
-  // Same-origin path so the browser displays the inline PDF viewer on all devices
-  // without triggering a forced download.
-  const previewUrl = "/Resume_Aditya_Ojha.pdf";
+  const directPdfUrl = "/Resume_Aditya_Ojha.pdf";
   const downloadUrl = "https://raw.githubusercontent.com/Kaditya67/kaditya67/main/Resume_Aditya_Ojha.pdf";
+  // Publicly resolvable HTTPS URL for Google Docs Viewer
+  const absolutePdfUrl = "https://adityaojha-portfolio.vercel.app/Resume_Aditya_Ojha.pdf";
+  const embeddedViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(absolutePdfUrl)}&embedded=true`;
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 bg-background text-foreground dark:bg-neutral-900 dark:text-white transition-colors duration-300">
@@ -21,7 +22,7 @@ const Resume = () => {
             <span className="text-muted-foreground dark:text-gray-300 font-medium">Document Preview</span>
             <div className="flex items-center gap-3">
               <a
-                href={previewUrl}
+                href={directPdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
@@ -40,9 +41,10 @@ const Resume = () => {
 
           <div className="w-full h-[650px] sm:h-[750px] rounded-lg overflow-hidden border border-border/60 dark:border-gray-700/60 bg-white">
             <iframe
-              src={previewUrl}
+              src={embeddedViewerUrl}
               title="Resume Preview"
               className="w-full h-full border-0"
+              allow="autoplay"
             />
           </div>
         </div>
