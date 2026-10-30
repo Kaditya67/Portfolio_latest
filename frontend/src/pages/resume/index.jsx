@@ -1,17 +1,18 @@
 import React from "react";
 
 const Resume = () => {
-  // Central resume hosted directly on GitHub profile repository (Kaditya67/kaditya67)
-  // Updating resume.pdf in kaditya67 repo updates all portfolio deployments automatically
-  const resumeUrl = "https://raw.githubusercontent.com/Kaditya67/kaditya67/main/Resume_Aditya_Ojha.pdf";
+  // Same-origin path so the browser displays the inline PDF viewer on all devices
+  // without triggering a forced download.
+  const previewUrl = "/Resume_Aditya_Ojha.pdf";
+  const downloadUrl = "https://raw.githubusercontent.com/Kaditya67/kaditya67/main/Resume_Aditya_Ojha.pdf";
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-background text-foreground dark:bg-neutral-900 dark:text-white transition-colors duration-300">
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 bg-background text-foreground dark:bg-neutral-900 dark:text-white transition-colors duration-300">
       <section className="w-full max-w-4xl">
         {/* === Header === */}
         <h1 className="text-3xl font-bold mb-2">Resume</h1>
         <p className="text-muted-foreground dark:text-gray-300 mb-6">
-          View or download my resume below.
+          View my resume below or download a copy.
         </p>
 
         {/* === PDF Preview Section === */}
@@ -20,7 +21,7 @@ const Resume = () => {
             <span className="text-muted-foreground dark:text-gray-300 font-medium">Document Preview</span>
             <div className="flex items-center gap-3">
               <a
-                href={resumeUrl}
+                href={previewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
@@ -28,8 +29,8 @@ const Resume = () => {
                 Open in new tab ↗
               </a>
               <a
-                href={resumeUrl}
-                download="Aditya_Ojha_Resume.pdf"
+                href={downloadUrl}
+                download="Resume_Aditya_Ojha.pdf"
                 className="text-primary hover:underline font-medium"
               >
                 Download ↓
@@ -39,12 +40,12 @@ const Resume = () => {
 
           <div className="w-full h-[650px] sm:h-[750px] rounded-lg overflow-hidden border border-border/60 dark:border-gray-700/60 bg-white">
             <iframe
-              src={`${resumeUrl}#toolbar=1&navpanes=0`}
+              src={`${previewUrl}#toolbar=1&navpanes=0`}
               title="Resume PDF"
               className="w-full h-full border-0"
             >
               <object
-                data={resumeUrl}
+                data={previewUrl}
                 type="application/pdf"
                 className="w-full h-full"
               >
@@ -57,7 +58,7 @@ const Resume = () => {
                   </p>
                   <div className="flex gap-3">
                     <a
-                      href={resumeUrl}
+                      href={previewUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-md border border-border bg-card dark:bg-neutral-700 text-xs font-medium hover:bg-accent transition"
@@ -65,8 +66,8 @@ const Resume = () => {
                       Open in New Tab ↗
                     </a>
                     <a
-                      href={resumeUrl}
-                      download="Aditya_Ojha_Resume.pdf"
+                      href={downloadUrl}
+                      download="Resume_Aditya_Ojha.pdf"
                       className="px-4 py-2 rounded-md bg-primary text-white text-xs font-medium hover:bg-primary/90 transition shadow-sm"
                     >
                       Download Resume ↓
@@ -81,14 +82,14 @@ const Resume = () => {
         {/* === Download Button === */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <a
-            href={resumeUrl}
-            download="Aditya_Ojha_Resume.pdf"
+            href={downloadUrl}
+            download="Resume_Aditya_Ojha.pdf"
             className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition shadow-sm"
           >
             Download Resume (PDF)
           </a>
           <a
-            href={resumeUrl}
+            href={previewUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-border bg-card dark:bg-neutral-800 text-foreground dark:text-white text-sm font-medium hover:bg-accent dark:hover:bg-neutral-700 transition"
