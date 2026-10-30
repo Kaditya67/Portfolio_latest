@@ -16,7 +16,24 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/(.*\\.pdf)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        }
+      ]
+    },
+    {
+      "source": "/((?!.*\\.pdf$).*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
